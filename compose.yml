@@ -48,10 +48,12 @@ services:
     image: postgres:15-alpine
     container_name: auth-db
     restart: always
+    env_file:
+      - .env
     environment:
-      POSTGRES_USER: admin123
-      POSTGRES_PASSWORD: ptt!
-      POSTGRES_DB: auth-db 
+      POSTGRES_USER: ${AUTH_DB_USER}
+      POSTGRES_PASSWORD: ${AUTH_DB_PASSWORD}
+      POSTGRES_DB: ${AUTH_DB_DB}
     stdin_open: true
     tty: true
     networks:
@@ -77,10 +79,12 @@ services:
     image: postgres:15-alpine
     container_name: user-db
     restart: always
+    env_file:
+      - .env
     environment:
-      POSTGRES_USER: admin123
-      POSTGRES_PASSWORD: ptt!
-      POSTGRES_DB: user-db 
+      POSTGRES_USER: ${USER_DB_USER}
+      POSTGRES_PASSWORD: ${USER_DB_PASSWORD}
+      POSTGRES_DB: ${USER_DB_DB}
     stdin_open: true
     tty: true
     networks:
@@ -107,10 +111,12 @@ services:
     image: postgres:15-alpine
     container_name: content-db
     restart: always
+    env_file:
+      - .env
     environment:
-      POSTGRES_USER: admin123
-      POSTGRES_PASSWORD: ptt!
-      POSTGRES_DB: content-db 
+      POSTGRES_USER: ${CONTENT_DB_USER}
+      POSTGRES_PASSWORD: ${CONTENT_DB_PASSWORD}
+      POSTGRES_DB: ${CONTENT_DB_DB}
     stdin_open: true
     tty: true
     networks:
@@ -137,10 +143,12 @@ services:
     image: postgres:15-alpine
     container_name: social-db
     restart: always
+    env_file:
+      - .env
     environment:
-      POSTGRES_USER: admin123
-      POSTGRES_PASSWORD: ptt!
-      POSTGRES_DB: social-db 
+      POSTGRES_USER: ${SOCIAL_DB_USER}
+      POSTGRES_PASSWORD: ${SOCIAL_DB_PASSWORD}
+      POSTGRES_DB: ${SOCIAL_DB_DB}
     stdin_open: true
     tty: true
     networks:
@@ -168,10 +176,12 @@ services:
     image: postgres:15-alpine
     container_name: realtime-db
     restart: always
+    env_file:
+      - .env
     environment:
-      POSTGRES_USER: admin123
-      POSTGRES_PASSWORD: ptt!
-      POSTGRES_DB: realtime-db 
+      POSTGRES_USER: ${REALTIME_DB_USER}
+      POSTGRES_PASSWORD: ${REALTIME_DB_PASSWORD}
+      POSTGRES_DB: ${REALTIME_DB_DB}
     stdin_open: true
     tty: true
     networks:
@@ -201,9 +211,11 @@ services:
       - observability_net
     volumes:
       - grafana-storage:/var/lib/grafana
+    env_file:
+      - .env
     environment:
-      - GF_SECURITY_ADMIN_USER=admin123
-      - GF_SECURITY_ADMIN_PASSWORD=ptt
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
     restart: unless-stopped
 
 
