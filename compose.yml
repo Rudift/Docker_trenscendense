@@ -161,7 +161,7 @@ services:
     environment:
       POSTGRES_USER: admin123
       POSTGRES_PASSWORD: ptt!
-      POSTGRES_DB: auth-db 
+      POSTGRES_DB: realtime-db 
     stdin_open: true
     tty: true
     networks:
