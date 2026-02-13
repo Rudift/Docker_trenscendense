@@ -7,6 +7,19 @@ services:
     networks:
       - edge_net
   
+  bff:
+    build: ./bff
+    container_name: bff
+    stdin_open: true
+    tty: true
+    networks:
+      - services_net
+      - edge_net
+      - observability_net
+    expose:
+     - "7000"
+     - "9100"
+
   gateway:
     image: nginx:alpine
     container_name: gateway
